@@ -2,7 +2,7 @@
 
 import pprint
 
-filename = 'orthologs_only.ace'
+filename = 'paralogs_only.ace'
 with open(filename, "r") as f:
     orthologs = {}
     for line in f:
@@ -36,6 +36,7 @@ with open(filename, "r") as f:
 species_set = set()
 algorithm_set = set()
 total_set = set()
+algorithm_count = 0
 
 for item in orthologs.keys():
     for sub_item in orthologs[item].keys():
@@ -50,6 +51,8 @@ for item in orthologs.keys():
             total_set.add(item_from_list)
             species_set.add(item_from_list[0])
             algorithm_set.add(item_from_list[1])
+            if item_from_list[1] == 'modENCODE_Pseudogenes':
+                algorithm_count+=1
 
 # Pretty print algorithm set.
 print('Algorithms:')
@@ -58,3 +61,9 @@ pprint.pprint(algorithm_set)
 # Pretty print species set.
 print('Species:')
 pprint.pprint(species_set)
+
+# for item in total_set:
+#     if item[0] == 'Homo sapiens':
+#         
+
+print(algorithm_count)
